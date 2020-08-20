@@ -94,7 +94,7 @@ export function BoxContainer() {
  
   return (
     <Box className={classes.wrapper}>
-      {/* {active ? ( */}
+      {active ? (
         <Box className={classes.container}>
           {squareArr.map((value) => (
             <Square
@@ -106,9 +106,9 @@ export function BoxContainer() {
             />
           ))}
         </Box>
-      {/* ) : (
+      ) : (
         ""
-      )} */}
+      )}
     </Box>
   );
 }

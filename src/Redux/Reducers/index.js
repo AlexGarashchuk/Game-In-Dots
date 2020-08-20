@@ -9,7 +9,6 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action){
-  debugger
   switch(action.type){
     case ADD_USER_NAME:
       return{
