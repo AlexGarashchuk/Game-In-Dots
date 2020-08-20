@@ -3,11 +3,10 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
 
 const Square = ({ name, onClick, className }) => {
   return (
-    <Button name={name} onClick={onClick} className={className} />
+    <input type='button' name={name} onClick={onClick} className={className} />
   );
 };
 const useStyles = makeStyles((theme) => ({
@@ -29,9 +28,21 @@ const useStyles = makeStyles((theme) => ({
     border: "0.5px solid grey",
   },
   btn: {
+    width: 50,
+    height: 50,
+    boxSizing: "border-box",
+    cursor: "pointer",
+    outline: "none",
+    border: "0.5px solid grey",
     background: "white",
   },
   actibeBtn: {
+    width: 50,
+    height: 50,
+    boxSizing: "border-box",
+    cursor: "pointer",
+    outline: "none",
+    border: "0.5px solid grey",
     background: "#43D8E7",
   },
 }));
@@ -64,49 +75,40 @@ export function BoxContainer() {
     24,
   ];
   const classes = useStyles();
-  const [color, setColor] = useState("btn");
   const mode = useSelector((state) => state.mode);
   const active = useSelector((state) => state.active);
+  const delay = useSelector((state) => state.delay)
+  const [randomSq, setRandomSq ] = useState(Math.floor(Math.random() * squareArr.length))
 
+
+  function onCatchTheButton(value){
+    randomSq === value ? console.log('Catch Catch Catch') :  console.log('Luser')
+ 
+  }
   useEffect(() => {
     const interval = setInterval(() => {
-      onChangeRandomSquare();
-    }, mode || 5000);
+      setRandomSq(Math.floor(Math.random() * squareArr.length))
+    }, delay);
     return () => clearInterval(interval);
   }, []);
-
-  function arrayRandElement() {
-    var rand = Math.floor(Math.random() * squareArr.length);
-     return squareArr[rand];
-
-   
-  }
-
-  function onClickButton(id) {
-    // console.log(id);
-    setColor("actibeBtn");
-  }
-
-  function onChangeRandomSquare() {
-    const randomSquareId = arrayRandElement(squareArr);
-    console.log(randomSquareId);
-  }
-
+ 
   return (
     <Box className={classes.wrapper}>
-      {active ? (
+      {/* {active ? ( */}
         <Box className={classes.container}>
           {squareArr.map((value) => (
             <Square
               key={value}
-              className={clsx(classes.paper, classes[color])}
-              onClick={() => onClickButton(value)}
+              // className={clsx(classes.paper, classes[color])}
+              className={randomSq === value ? classes.actibeBtn : classes.btn}
+              onClick={() => onCatchTheButton(value)}
+             
             />
           ))}
         </Box>
-      ) : (
+      {/* ) : (
         ""
-      )}
+      )} */}
     </Box>
   );
 }

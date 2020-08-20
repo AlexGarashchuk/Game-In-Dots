@@ -30,7 +30,7 @@ export function Enter() {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
-    userName: '',
+    userName: 'Jon Smith',
     dataTime: new Date(),
     activeSquare: false
   });
@@ -49,8 +49,8 @@ export function Enter() {
   };
   const handleAddPerson = () => {
     const { userName } = state;
-   
-    dispatch(addUserName({userName, mode}));
+
+    dispatch(addUserName({userName, mode, data}));
     
   };
 
@@ -119,6 +119,7 @@ export function Enter() {
                 color="primary"
                 size="large"
                 onClick={handleAddPerson}
+                disabled={!mode ? true : false}
               >
                 PLAY
               </Button>

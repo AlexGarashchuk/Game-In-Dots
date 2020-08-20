@@ -4,20 +4,20 @@ const initialState = {
   user: [],
   mode: '',
   date: '',
-  active: false
+  active: false,
+  delay: 1000
 };
 
 function rootReducer(state = initialState, action){
   debugger
   switch(action.type){
     case ADD_USER_NAME:
-
-      debugger
       return{
         ...state,
         user: state.user.concat(action.payload.userName),
         mode: state.mode.concat(action.payload.mode),
-        date: state.date.concat(action.payload),
+        date: action.payload,
+        delay: action.payload.data.easyMode.delay,
         active: true
       }
 
