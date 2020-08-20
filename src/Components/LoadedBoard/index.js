@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //matertial
 import List from "@material-ui/core/List";
@@ -20,8 +20,9 @@ export function LoadedBoard() {
   const classes = useStyles();
 
   const userName = useSelector(state => state.user);
-  const dataTime = new Date()
-  console.log(dataTime)
+  
+  const [date, setDate] = useState(new Date())
+ console.log(date)
   return (
     <div className={classes.wrapper}>
       <h2>Loaded Board</h2>
@@ -30,7 +31,7 @@ export function LoadedBoard() {
           <List component="nav" aria-label="secondary mailbox folders">
             <ListItem button>
               <ListItemText primary={name} />
-              <ListItemText edge="end" primary='now' />
+              <ListItemText edge="end" primary='' />
             </ListItem>
             <Divider />
           </List>
