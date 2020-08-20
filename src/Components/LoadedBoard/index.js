@@ -21,8 +21,10 @@ export function LoadedBoard() {
 
   const userName = useSelector(state => state.user);
   
-  const [date, setDate] = useState(new Date())
- console.log(date)
+  const [dateTime, setDateTime] = useState(new Date());
+
+
+
   return (
     <div className={classes.wrapper}>
       <h2>Loaded Board</h2>
@@ -31,7 +33,7 @@ export function LoadedBoard() {
           <List component="nav" aria-label="secondary mailbox folders">
             <ListItem button>
               <ListItemText primary={name} />
-              <ListItemText edge="end" primary='' />
+              <ListItemText edge="end" primary={`${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`} />
             </ListItem>
             <Divider />
           </List>
