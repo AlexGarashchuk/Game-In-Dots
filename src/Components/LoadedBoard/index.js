@@ -29,8 +29,8 @@ export function LoadedBoard() {
     <div className={classes.wrapper}>
       <h2>Loaded Board</h2>
       <div>
-        {userName.map((name) => (
-          <List component="nav" aria-label="secondary mailbox folders">
+        {userName.map((name, id) => (
+          <List component="nav" aria-label="secondary mailbox folders" key={id}>
             <ListItem button>
               <ListItemText primary={name} />
               <ListItemText edge="end" primary={`${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`} />
