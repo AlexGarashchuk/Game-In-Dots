@@ -22,8 +22,12 @@ export function LoadedBoard() {
   const userName = useSelector(state => state.user);
   
   const [dateTime, setDateTime] = useState(new Date());
+  const userPoint = useSelector(state => state.userPoint)
+  const computerPoint = useSelector(state => state.computerPoint)
 
+  useEffect(() => {
 
+  }, [userPoint, computerPoint])
 
   return (
     <div className={classes.wrapper}>
@@ -31,10 +35,18 @@ export function LoadedBoard() {
       <div>
         {userName.map((name, id) => (
           <List component="nav" aria-label="secondary mailbox folders" key={id}>
-            <ListItem button>
+            {userPoint > 0 ? (
+              <ListItem button>
               <ListItemText primary={name} />
-              <ListItemText edge="end" primary={`${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`} />
+              <ListItemText primary={userPoint}/>
             </ListItem>
+            ) : ''}
+            {computerPoint >0 ? (
+              <ListItem button>
+              <ListItemText primary="Computer" />
+              <ListItemText primary={computerPoint}/>
+            </ListItem>
+            ) : ''}
             <Divider />
           </List>
         ))}

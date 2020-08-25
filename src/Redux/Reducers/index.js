@@ -1,24 +1,39 @@
-import { ADD_USER_NAME } from "../Actions";
+import { ADD_USER_NAME, GET_USER_POINT, GET_COMPUTER_POINT } from "../Actions";
 
 const initialState = {
   user: [],
-  mode: '',
+  field: '',
   date: '',
   active: false,
-  delay: 1000
+  delay: 5000,
+  userPoint: 0,
+  computerPoint: 0,
 };
 
 function rootReducer(state = initialState, action){
   switch(action.type){
+   
     case ADD_USER_NAME:
       return{
         ...state,
         user: state.user.concat(action.payload.userName),
-        mode: state.mode.concat(action.payload.mode),
+        field: action.payload.mode.field,
         date: action.payload,
-        delay: action.payload.data.easyMode.delay,
+        delay: action.payload.mode.delay,
         active: true
       }
+      case GET_USER_POINT:
+       
+        return{
+          ...state,
+          userPoint: action.payload.userPoint,
+        }
+        case GET_COMPUTER_POINT:
+      
+        return{
+          ...state,
+          computerPoint: action.payload.computerPoint,
+        }
 
   default:
     return state;

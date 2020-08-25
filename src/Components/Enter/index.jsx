@@ -30,31 +30,13 @@ export function Enter() {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
-    userName: 'Jon Smith',
+    userName: "Jon Smith",
     dataTime: new Date(),
-    activeSquare: false
+    activeSquare: false,
   });
-  const [mode, setMode] = useState('')
-
-  const onChangeMode = (e) => {
-    setMode(e.target.value)
-  }
+  const [mode, setMode] = useState([]);
   const [data, setData] = useState();
-
-  const handleChange = (event) => {
-    setState({ 
-      ...state, 
-      [event.target.id]: event.target.value,
-     });
-  };
-  const handleAddPerson = () => {
-    const { userName } = state;
-
-    dispatch(addUserName({userName, mode, data}));
-    
-  };
-
-
+  const [delay, setDelay] = useState()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,9 +44,27 @@ export function Enter() {
         "https://starnavi-frontend-test-task.herokuapp.com/game-settings"
       );
       setData(result.data);
+   
     };
     fetchData();
+   
   }, []);
+  
+ const onChangeMode = (event) => {
+    setMode(event.target.value)
+  }
+
+  const handleChange = (event) => {
+    setState({
+      ...state,
+      userName: event.target.value,
+    });
+
+  };
+  const handleAddPerson = () => {
+    const { userName } = state;
+    dispatch(addUserName({ userName, mode, data }));
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -72,7 +72,7 @@ export function Enter() {
         <div className={classes.formHeader}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={4}>
-              <FormControl variant="outlined" className={classes.formControl} >
+              <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">
                   Pick game mode
                 </InputLabel>
@@ -81,22 +81,23 @@ export function Enter() {
                   id="mode"
                   value={mode}
                   onChange={onChangeMode}
+                  name={delay}
                 >
                   <MenuItem
                     value={data.easyMode.field}
-                    dalay={data.easyMode.dalay}
+                    delay={data.easyMode.delay}
                   >
                     {data.easyMode.field}
                   </MenuItem>
                   <MenuItem
                     value={data.normalMode.field}
-                    dalay={data.normalMode.dalay}
+                    delay={data.normalMode.delay}
                   >
                     {data.normalMode.field}
                   </MenuItem>
                   <MenuItem
                     value={data.hardMode.field}
-                    dalay={data.hardMode.dalay}
+                    delay={data.hardMode.delay}
                   >
                     {data.hardMode.field}
                   </MenuItem>
@@ -108,8 +109,6 @@ export function Enter() {
                 id="userName"
                 label="Enter your name"
                 variant="outlined"
-                // value={name}
-                // onChange={() => onDispatchName(name)}
                 onChange={handleChange}
               />
             </Grid>
